@@ -10,7 +10,7 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"optimize": "svgo -f ./SourceFolderSVG -o ./ResultFolderSVG"
+		"optimize": "svgo -f ./src/SourceFolderSVG -o ./src/ResultFolderSVG"
 	},
 	"eslintConfig": {
 		"extends": [
