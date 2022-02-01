@@ -48,14 +48,82 @@ module.exports = {
 				}
 			},
 		},
+
 		{
-			name: 'removeAllFillStroke',
+			name: 'removeFont-family',
 			type: 'perItem',
 			fn: item => {
-				if (item.hasAttr('fill')) {
-					item.removeAttr('fill')
+				if (item.hasAttr('font-family')) {
+					item.removeAttr('font-family')
 				}
 			},
 		},
+		{
+			name: 'removeFont-size',
+			type: 'perItem',
+			fn: item => {
+				if (item.hasAttr('font-size')) {
+					item.removeAttr('font-size')
+				}
+			},
+		},
+		{
+			name: 'removeFont-weight',
+			type: 'perItem',
+			fn: item => {
+				if (item.hasAttr('font-weight')) {
+					item.removeAttr('font-weight')
+				}
+			},
+		},
+		{
+			name: 'removeFont-style',
+			type: 'perItem',
+			fn: item => {
+				if (item.hasAttr('font-style')) {
+					item.removeAttr('font-style')
+				}
+			},
+		},
+		{
+			name: 'removeFillInPlaceGroupe',
+			type: 'perItem',
+			fn: ast => {
+				if (ast.hasAttr('id')) {
+					if (ast.attributes.id.split('_')[0] === 'place') {
+						ast.children.forEach(element => {
+							if (element.hasAttr('fill')) {
+								element.removeAttr('fill')
+							}
+							if (element.hasAttr('stroke')) {
+								element.removeAttr('stroke')
+							}
+							if (element.children.length > 0) {
+								element.children.forEach(el => {
+									if (el.hasAttr('fill')) {
+										el.removeAttr('fill')
+									}
+									if (el.hasAttr('stroke')) {
+										el.removeAttr('stroke')
+									}
+								})
+							}
+						})
+					}
+				}
+			},
+		},
+		// {
+		// 	name: 'removeAllFillStroke',
+		// 	type: 'perItem',
+		// 	fn: item => {
+		// 		if (item.hasAttr('fill')) {
+		// 			item.removeAttr('fill')
+		// 		}
+		// 		if (item.hasAttr('stroke')) {
+		// 			item.removeAttr('stroke')
+		// 		}
+		// 	},
+		// },
 	],
 }
