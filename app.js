@@ -16,7 +16,7 @@ pathes.forEach(path => {
 		.filter(el => el >= 0)
 		.join('')
 		.trim()
-	console.log(roomName)
+
 	fs.readFile(path, 'utf8', (error, data) => {
 		allRooms.push({
 			officeName: officeName,
