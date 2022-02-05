@@ -1,5 +1,6 @@
 module.exports = {
 	plugins: [
+		// ! Config String svg for react app
 		'convertStyleToAttrs',
 		'removeStyleElement',
 		{
@@ -48,7 +49,6 @@ module.exports = {
 				}
 			},
 		},
-
 		{
 			name: 'removeFont-family',
 			type: 'perItem',
@@ -113,15 +113,26 @@ module.exports = {
 				}
 			},
 		},
+
+		// ! Confige only previews rooms
 		// {
-		// 	name: 'removeAllFillStroke',
+		// 	name: 'removeAttrs',
+		// 	params: {
+		// 		attrs: 'rect:fill:white',
+		// 	},
+		// },
+		// {
+		// 	name: 'removeTextFillPreview',
 		// 	type: 'perItem',
-		// 	fn: item => {
-		// 		if (item.hasAttr('fill')) {
-		// 			item.removeAttr('fill')
-		// 		}
-		// 		if (item.hasAttr('stroke')) {
-		// 			item.removeAttr('stroke')
+		// 	params: {
+		// 		type: 'element',
+		// 		name: 'text',
+		// 	},
+		// 	fn: (item, params, info) => {
+		// 		if (item.name == params.name) {
+		// 			if (item.hasAttr('fill')) {
+		// 				item.removeAttr('fill')
+		// 			}
 		// 		}
 		// 	},
 		// },
