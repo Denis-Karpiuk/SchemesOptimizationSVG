@@ -1,9 +1,10 @@
 const fs = require('fs')
 
-const sourseFolderPath = './src/ResultFolderSVG'
-const resultFolderPath = './src/Result_JSON/Rooms.json'
-
 const officeName = 'K3'
+const cityName = 'Gomel'
+
+const sourseFolderPath = './src/Result_SVG'
+const resultFolderPath = `./src/Result_JSON/${officeName}_${cityName}.json`
 
 let pathes = fs
 	.readdirSync(sourseFolderPath, () => {})
@@ -23,6 +24,7 @@ pathes.forEach(path => {
 			roomName: roomName,
 			schema: data,
 		})
+
 		allRooms.sort((a, b) => (a.roomName > b.roomName ? 1 : -1))
 
 		fs.writeFile(resultFolderPath, JSON.stringify(allRooms), () => {})

@@ -10,8 +10,9 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"optimize": "svgo -f ./src/SourceFolderSVG -o ./src/ResultFolderSVG",
-		"getjson": "node app"
+		"set": "node createFolders",
+		"optimize": "svgo -f ./src/Source_SVG -o ./src/Result_SVG",
+		"getjson": "node createJSON"
 	},
 	"eslintConfig": {
 		"extends": [
