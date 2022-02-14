@@ -1,4 +1,8 @@
-module.exports = {
+const schemaConfig = {
+	// optional but recommended field
+	path: 'path-to.svg',
+	// all config fields are also available here
+	multipass: true,
 	plugins: [
 		'convertStyleToAttrs',
 		'removeStyleElement',
@@ -114,3 +118,5 @@ module.exports = {
 		},
 	],
 }
+
+module.exports.schemaConfig = schemaConfig

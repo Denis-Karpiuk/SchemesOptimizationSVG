@@ -1,22 +1,30 @@
-module.exports = {
+const fs = require('fs')
+const { optimize } = require('svgo')
+const names = require('./office_city_names')
+
+const previewsSVGOConfig = {
+	// optional but recommended field
+	path: 'path-to.svg',
+	// all config fields are also available here
+	multipass: true,
 	plugins: [
-		'convertStyleToAttrs',
 		'removeStyleElement',
 		{
 			name: 'preset-default',
 			params: {
 				overrides: {
 					removeViewBox: false,
-					cleanupIDs: false,
+					cleanupIDs: true,
 				},
 			},
 		},
-		{
-			name: 'addAttributesToSVGElement',
-			params: {
-				attributes: ['fill="none"'],
-			},
-		},
+		// {
+		// 	name: 'removeAttrs',
+		// 	params: {
+		// 		attrs: 'fill:#fff',
+		// 	},
+		// },
+
 		{
 			name: 'removeAttrXMLSPACe',
 			type: 'perItem',
@@ -84,33 +92,61 @@ module.exports = {
 				}
 			},
 		},
+
 		{
-			name: 'removeFillInPlaceGroupe',
+			name: 'fff',
 			type: 'perItem',
-			fn: ast => {
-				if (ast.hasAttr('id')) {
-					if (ast.attributes.id.split('_')[0] === 'place') {
-						ast.children.forEach(element => {
-							if (element.hasAttr('fill')) {
-								element.removeAttr('fill')
-							}
-							if (element.hasAttr('stroke')) {
-								element.removeAttr('stroke')
-							}
-							if (element.children.length > 0) {
-								element.children.forEach(el => {
-									if (el.hasAttr('fill')) {
-										el.removeAttr('fill')
-									}
-									if (el.hasAttr('stroke')) {
-										el.removeAttr('stroke')
-									}
-								})
-							}
-						})
+			fn: (item, params, info) => {
+				let end = true
+				if (item.name == 'path' && end) {
+					if (item.attributes.fill === '#fff') {
+						item.removeAttr('fill')
+					}
+				}
+			},
+		},
+
+		{
+			name: 'removeTextFillPreview',
+			type: 'perItem',
+			params: {
+				type: 'element',
+				name: 'text',
+			},
+			fn: (item, params, info) => {
+				if (item.name == params.name) {
+					if (item.hasAttr('fill')) {
+						item.removeAttr('fill')
 					}
 				}
 			},
 		},
 	],
 }
+
+const sourseFolderPath = './src/Source_SVG'
+const resultLocalPath = `./src/Result_Previews_SVG/${names.office}_${names.city}_`
+
+let pathes = fs
+	.readdirSync(sourseFolderPath, () => {})
+	.map(path => sourseFolderPath + '/' + path)
+
+pathes.forEach(path => {
+	let roomName = path
+		.split('')
+		.filter(el => el >= 0)
+		.join('')
+		.trim()
+
+	fs.readFile(path, 'utf8', (error, data) => {
+		const result = optimize(data, previewsSVGOConfig)
+		const optimizedSvgString = result.data
+
+		// save result in local result folder
+		fs.writeFile(
+			`${resultLocalPath}${roomName}.svg`,
+			optimizedSvgString,
+			() => {}
+		)
+	})
+})

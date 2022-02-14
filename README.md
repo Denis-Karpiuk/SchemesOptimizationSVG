@@ -1,19 +1,73 @@
-# Optimization of svg files for the WorkSpacePortal
+# Optimization SVG files for the WorkSpacePortal
 
-# Important
+## Important!
 
-All elements workplace must be in one groupe and to have name with word 'place\_....'
-Monitor must to have name 'comp'.
-Room schema must not have free space around.
+### Workplace must be:
+
+- all elements of the workplace must be in **`the same group`**
+- the group must have an id with the word "place\_" in the name : **`id="place_SOMENAME"`**
+- element computer must have **`id="comp"`**
+- the place number must be represented by the tag `<text>`
+- room schema must not have free space around
+
+![](./assets/Workplace.png) ![](./assets/RoomSchema.png)
 
 # How to use
 
-Put your svg files in SourceFolder than start command 'yarn optimize' after you will get ResultFolder with svg files next step you can to get JSON file with svg files as a object with description and svg as string.
-Open file app.js and write name office than start 'yarn getjson' and you will get Result_JSON folder with all svg files descriptios : officeName, roomName, schema(svg as string).
+# Add new office
 
-### New Instruction
+## Step 1
 
-#Yarn set - this command create nessary folders for work with app
-#Put you svg in src/Source_SVG folder
-#yarn optimize - this command to make optimize svg wich will be in src/Result_SVG
-#yarn getjson - this command create JSON with you svg as string and description officeNaem, cityName.
+- run the command **`yarn set`** in the terminal - this command will create nessary folders in **`src`** folder for work app
+
+## Step 2
+
+- put you svg files in **`src/Source_SVG`**
+
+## Step 3
+
+- open file **`app/office_city_names.js`**
+- and change **`office`** and **`city`** currents to need you
+
+## Step 4
+
+* run the command **`yarn fullflow`** in the terminal - this command create:
+
+  + json file with svg schema as stirng for data base in folder **`server/WSP.WebAPI/Json/Rooms/JSON_FILE`**
+  + folder with all previews for office rooms in folder **`client/assets/images/roomPreviews/FOLDER_WITH_PREVIEW`**
+  + all dynamic imports for render nessary previews in moment in file **`client/utils/previewsImport/roomPreviews.js`**
+
+# Add some rooms for existing office
+
+## Step 1, Step 2, Step 3 as higer
+
+## Step 4
+
+* run the command **`yarn someflow`** - this command create:
+
+  + json file with svg schema as stirng for data base in folder **`src/Result_JSON`**
+  + svg for previews in folder **`src/Result_Previews_SVG`**
+
+_*you need copy nessary data from these folders and add to existing offices json and folder with perviews and add dynamic imprt for these rooms._
+
+# Additionaly
+
+## Only optimizing SVG
+
+- run the command **`yarn optimize`** in the terminal - this command create new optimized svg files in the folder **`Result_SVG`**
+
+## Only create SVG prewies (create svg files wihout numbers on tables)
+
+- run **`yarn getprev`** - this command create new svg files if folder **`src/Result_Previews_SVG`**
+
+## Converte SVG previews for rooms to PNG format
+
+- run **`yarn getpng`** - thisc command converte svg files from folder **`src/Result_Previews_SVG`** to png files in **`src/Result_Previews_PNG`**
+
+## Clrear Source_SVG folder
+- run **`yarn clearsource`** - this command delete files from **`src/Source_SVG`**
+
+## Delete all folders from src
+- run **`yarn clearsrc`** - this command delete all folders with files in **`src**
+
+

@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"sharp": "^0.30.0",
 		"svgo": "^2.5.0"
 	},
 	"scripts": {
@@ -10,9 +11,15 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"set": "node createFolders",
+		"set": "node ./app/foldersCreator",
 		"optimize": "svgo -f ./src/Source_SVG -o ./src/Result_SVG",
-		"getjson": "node createJSON"
+		"getjson": "node ./app/jsonCreator",
+		"getprev": "node ./app/previewsSVGCreator",
+		"getpng": "node ./app/previewsPNGCreator",
+		"fullflow": "node ./app/fullFlow",
+		"someflow": "node ./app/shortFlow",
+		"clearsource": "node ./app/clearSourseFolder",
+		"clearsrc": "node ./app/srcClear"
 	},
 	"eslintConfig": {
 		"extends": [
