@@ -1,4 +1,8 @@
-module.exports = {
+const floorSchemaConfig = {
+	// optional but recommended field
+	path: 'path-to.svg',
+	// all config fields are also available here
+	multipass: true,
 	plugins: [
 		'convertStyleToAttrs',
 		'removeStyleElement',
@@ -85,7 +89,7 @@ module.exports = {
 			},
 		},
 		{
-			name: 'removeFillandStrokeInPlaceGroupe',
+			name: 'removeFillInPlaceGroupe',
 			type: 'perItem',
 			fn: ast => {
 				if (ast.hasAttr('id')) {
@@ -112,5 +116,23 @@ module.exports = {
 				}
 			},
 		},
+		{
+			name: 'removeFillandStrokePlacesFloorPlan',
+			type: 'perItem',
+			fn: ast => {
+				if (ast.hasAttr('id')) {
+					if (ast.attributes.id.split('_')[0] === 'place') {
+						if (ast.hasAttr('fill')) {
+							ast.removeAttr('fill')
+						}
+						if (ast.hasAttr('stroke')) {
+							ast.removeAttr('stroke')
+						}
+					}
+				}
+			},
+		},
 	],
 }
+
+module.exports.floorSchemaConfig = floorSchemaConfig

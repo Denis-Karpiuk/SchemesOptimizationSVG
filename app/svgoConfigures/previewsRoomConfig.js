@@ -1,20 +1,17 @@
-module.exports = {
+const previewsRoomConfig = {
+	// optional but recommended field
+	path: 'path-to.svg',
+	// all config fields are also available here
+	multipass: true,
 	plugins: [
-		'convertStyleToAttrs',
 		'removeStyleElement',
 		{
 			name: 'preset-default',
 			params: {
 				overrides: {
 					removeViewBox: false,
-					cleanupIDs: false,
+					cleanupIDs: true,
 				},
-			},
-		},
-		{
-			name: 'addAttributesToSVGElement',
-			params: {
-				attributes: ['fill="none"'],
 			},
 		},
 		{
@@ -84,33 +81,36 @@ module.exports = {
 				}
 			},
 		},
+
 		{
-			name: 'removeFillandStrokeInPlaceGroupe',
+			name: 'fff',
 			type: 'perItem',
-			fn: ast => {
-				if (ast.hasAttr('id')) {
-					if (ast.attributes.id.split('_')[0] === 'place') {
-						ast.children.forEach(element => {
-							if (element.hasAttr('fill')) {
-								element.removeAttr('fill')
-							}
-							if (element.hasAttr('stroke')) {
-								element.removeAttr('stroke')
-							}
-							if (element.children.length > 0) {
-								element.children.forEach(el => {
-									if (el.hasAttr('fill')) {
-										el.removeAttr('fill')
-									}
-									if (el.hasAttr('stroke')) {
-										el.removeAttr('stroke')
-									}
-								})
-							}
-						})
+			fn: (item, params, info) => {
+				let end = true
+				if (item.name == 'path' && end) {
+					if (item.attributes.fill === '#fff') {
+						item.removeAttr('fill')
+					}
+				}
+			},
+		},
+
+		{
+			name: 'removeTextFillPreview',
+			type: 'perItem',
+			params: {
+				type: 'element',
+				name: 'text',
+			},
+			fn: (item, params, info) => {
+				if (item.name == params.name) {
+					if (item.hasAttr('fill')) {
+						item.removeAttr('fill')
 					}
 				}
 			},
 		},
 	],
 }
+
+module.exports.previewsRoomConfig = previewsRoomConfig

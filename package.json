@@ -11,15 +11,11 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"set": "node ./app/foldersCreator",
-		"optimize": "svgo -f ./src/Source_SVG -o ./src/Result_SVG",
-		"getjson": "node ./app/jsonCreator",
-		"getprev": "node ./app/previewsSVGCreator",
-		"getpng": "node ./app/previewsPNGCreator",
-		"fullflow": "node ./app/fullFlow",
-		"someflow": "node ./app/shortFlow",
-		"clearsource": "node ./app/clearSourseFolder",
-		"clearsrc": "node ./app/srcClear"
+		"set": "node ./app/createFolders",
+		"createschemas": "node ./app/create_Office_Rooms_Floors_Previews",
+		"deletesrc": "node ./app/deleteSRC",
+		"clearserver": "node ./app/delete_Rooms_Floors_Previews_on_Server",
+		"optimize": "svgo -f ./src/SourceFolder -o ./src/ResultFolder"
 	},
 	"eslintConfig": {
 		"extends": [

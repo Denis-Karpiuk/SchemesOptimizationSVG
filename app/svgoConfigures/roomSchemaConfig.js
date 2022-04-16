@@ -1,4 +1,8 @@
-module.exports = {
+const roomSchemaConfig = {
+	// optional but recommended field
+	path: 'path-to.svg',
+	// all config fields are also available here
+	multipass: true,
 	plugins: [
 		'convertStyleToAttrs',
 		'removeStyleElement',
@@ -85,7 +89,7 @@ module.exports = {
 			},
 		},
 		{
-			name: 'removeFillandStrokeInPlaceGroupe',
+			name: 'removeFillInPlaceGroupe',
 			type: 'perItem',
 			fn: ast => {
 				if (ast.hasAttr('id')) {
@@ -114,3 +118,5 @@ module.exports = {
 		},
 	],
 }
+
+module.exports.roomSchemaConfig = roomSchemaConfig
